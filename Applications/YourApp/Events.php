@@ -36,10 +36,11 @@ class Events
      */
     public static function onConnect($client_id)
     {
+        $res = ['client_id' => $client_id, 'ip' =>  $_SERVER['REMOTE_ADDR']];
         // 向当前client_id发送数据 
-        Gateway::sendToClient($client_id, "Hello $client_id\r\n");
+        Gateway::sendToClient($client_id, json_encode($res));
         // 向所有人发送
-        Gateway::sendToAll("$client_id login\r\n");
+        // Gateway::sendToAll("$client_id login\r\n");
     }
     
    /**
